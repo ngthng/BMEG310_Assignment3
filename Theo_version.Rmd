@@ -9,22 +9,43 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+# Q1. Sequencing technologies
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Areas of the genome with high GC content are harder to sequence because these 
+regions coil up to themselves and require energy to separate them into straight
+strands that can finally be PCR-ed/sequenced. 
+Source: https://www.neb.com/en/nebinspired-blog/four-tips-for-pcr-amplification
+-of-gc-rich-sequences#:~:text=Why%20can%20these%20regions%20be,break%20the%20th
+ree%20hydrogen%20bonds.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# Q2. Global alignment exercise
 
-```{r cars}
-summary(cars)
+# Q3. Looking at the Metadata of an alignment (SAM) file
+
+## Q3.1
+
+```{r}
+data_metadat_sam = read.csv("single_cell_RNA_seq_bam.sam", nrows=73, sep="\t", header=FALSE,
+fill=TRUE)
 ```
 
-## Including Plots
+SN is reference sequence name, and LN is reference sequence length with range
+[1, 2^31 − 1]
 
-You can also embed plots, for example:
+## Q3.2 
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+The length of the X chromosome for our alignment is the LN value 
+
+# Q4. Looking at the Reads of an alignment (SAM) file
+
+## Q4.1 
+
+```{r}
+sam <- read.csv("single_cell_RNA_seq_bam.sam", sep="\t", header=FALSE,
+comment.char="@", col.names = paste0("V",seq_len(30)), fill=TRUE)
+sam <- sam[paste0("V",seq_len(11))]
+
+concat("Number of reads in this BAM file is:", length(sam)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
