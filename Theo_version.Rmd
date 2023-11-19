@@ -184,10 +184,13 @@ df_quality = stack(as.data.frame(df_quality))
 plotting the barplot
 ```{r}
 ggplot(data = df_quality)+
-  geom_boxplot(aes(x=ind, y = values))
+  geom_boxplot(aes(x=ind, y = values)) +
+  ggtitle("Boxplot of quality score of base position of reads") +
+  xlab("Base position") +
+  ylab("Quality")
 
 ```
-
+The Base Quality varies at the beginning and end of each read, with the mean being toward the lower end (30). For the middle part, the base Quality stays consistently high. 
 
 ## Q4.6
 
