@@ -20,6 +20,10 @@ ree%20hydrogen%20bonds.
 
 # Q2. Global alignment exercise
 
+```{r, out.width="0.3\\linewidth", include=TRUE, fig.align="center", fig.cap=c("your caption"), echo=FALSE}
+knitr::include_graphics("Untitled Page.jpg")
+```
+
 # Q3. Looking at the Metadata of an alignment (SAM) file
 
 ## Q3.1
@@ -226,7 +230,7 @@ vcf_file <- readLines(vcf_con)
 close(vcf_con)
 vcf <- data.frame(vcf_file)
 header <- vcf[grepl("##", vcf$vcf_file), ]
-factor(header)
+# factor(header)
 variants <- read.csv("RNA_seq_annotated_variants.vcf", skip=length(header),
 header=TRUE, sep="\t")
 ```
@@ -344,7 +348,8 @@ for (index in 1:nrow(variants)){
 }
 
 ggplot(data = variants) + 
-  geom_boxplot(aes(y = VAF))
+  geom_boxplot(aes(y = VAF))+
+  ggtitle("Boxplot of VAF values across all variants")
 
 variants$VAFgreater5 = variants$VAF > 0.05
 cat("Number of variants with VAF > 5%:", sum(variants$VAFgreater5, na.rm = TRUE), "\n")
