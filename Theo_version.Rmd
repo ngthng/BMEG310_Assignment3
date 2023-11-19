@@ -210,7 +210,8 @@ cat("There are",sum(sam$MAPQ_50less), "reads that have mapping quality score les
 ## Q4.9
 
 ```{r}
-
+mean_MAPQ_50less = mean(sam[sam$MAPQ_50less == TRUE,]$V5)
+cat("Mean mapping quality of the reads that has MAPQ less than 50:", mean_MAPQ_50less)
 ```
 
 
