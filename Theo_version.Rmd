@@ -212,7 +212,7 @@ mean_MAPQ_50less = mean(sam[sam$MAPQ_50less == TRUE,]$V5)
 cat("Mean mapping quality of the reads that has MAPQ less than 50:", mean_MAPQ_50less)
 ```
 ## Q4.10
-There are 63 reads that alligns to tdTomato. The reason why modifying a genome to include a fluorophore is for better live cell imaging under a microscope, probably for counting number of cells or traceing cells.
+There are 63 reads that alligns to tdTomato. The cell IS expected to emit fluorescently. The reason why modifying a genome to include a fluorophore is for better live cell imaging under a microscope, probably for counting number of cells or traceing cells.
 
 # Q5. Investigating the Variants
 
