@@ -1,3 +1,4 @@
+
 ---
 title: "Theo's version"
 author: "Theo-60985751, Hannah- , Jingxuan-"
@@ -60,10 +61,10 @@ cat("Number of reads in this BAM file:", nrow(sam))
 ## Q4.2 
 
 ```{r}
-print(sam[10,])
+tenth_row <- as.character(sam[10, ])
+print(tenth_row)
 ```
-We should look at column "V3" to find the chromosome to which the read was 
-aligned (the reference sequence). Column "V11" is the quality score in ASCII
+The chromosome to which the read was aligned is represented by the "RNAME" field, which corresponds to column V3 in the dataframe. The "QUAL" field in BAM corresponds to the column V11 in the dataframe. 
 base. 
 
 ## Q4.3
@@ -73,8 +74,6 @@ sam$X_allign = sam$V3 == 'X'
 cat("There are", sum(sam$X_allign), "reads that alligns to chromosome X")
 
 ```
-
-
 ## Q4.4
 
 ```{r}
@@ -196,7 +195,7 @@ The Base Quality varies at the beginning and end of each read, with the mean bei
 
 ## Q4.6
 
-Column 4 contains the leftmost mapping position of the read
+The column that contains the leftmost mapping position of the reads is represented by the 'POS' field (column 4). 
 
 ## Q4.7
 
