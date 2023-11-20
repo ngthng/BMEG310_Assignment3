@@ -1,7 +1,7 @@
 
 ---
 title: "Theo's version"
-author: "Theo-60985751, Hannah- , Jingxuan-"
+author: "Theo-60985751, Hannah- , Jingxuan-85741635"
 date: "2023-11-18"
 output:
   word_document: default
@@ -23,8 +23,9 @@ ree%20hydrogen%20bonds.
 
 # Q2. Global alignment exercise
 
-```{r, out.width="0.3\\linewidth", include=TRUE, fig.align="center", fig.cap=c("your caption"), echo=FALSE}
-knitr::include_graphics("Untitled Page.jpg")
+```{r, out.width="0.3\\linewidth", include=TRUE, fig.align="center", echo=FALSE}
+knitr::include_graphics("image1.png")
+knitr::include_graphics("image2.png")
 ```
 
 # Q3. Looking at the Metadata of an alignment (SAM) file
@@ -44,8 +45,6 @@ SN is reference sequence name, and LN is reference sequence length with range
 ```{r}
 cat("Length of our X chromosome aligntment: ", data_metadat_sam[22,3])
 ```
-
-
 # Q4. Looking at the Reads of an alignment (SAM) file
 
 ## Q4.1 
@@ -57,7 +56,6 @@ sam <- sam[paste0("V",seq_len(11))]
 
 cat("Number of reads in this BAM file:", nrow(sam))
 ```
-
 ## Q4.2 
 
 ```{r}
@@ -146,8 +144,6 @@ for (read in mini_sam2$V11){
 }
 df_quality_2 = df_quality_2[,-c(1)]
 
-
-
 ```
 
 mini_sam3
@@ -163,8 +159,6 @@ for (read in mini_sam3$V11){
   read_number = read_number + 1
 }
 df_quality_3 = df_quality_3[,-c(1)]
-
-
 
 ```
 
@@ -205,8 +199,6 @@ sam$hspa8_allign = sam$V4 > 40801273 & sam$V4 < 40805199
 cat("There are", sum(sam$hspa8_allign), "reads that have their leftmost mapping
     position aligned with the cordinate for Hspa8 protein")
 ```
-
-
 ## Q4.8
 
 ```{r}
@@ -221,8 +213,8 @@ cat("There are",sum(sam$MAPQ_50less), "reads that have mapping quality score les
 mean_MAPQ_50less = mean(sam[sam$MAPQ_50less == TRUE,]$V5)
 cat("Mean mapping quality of the reads that has MAPQ less than 50:", mean_MAPQ_50less)
 ```
-
 ## Q4.10
+There are 63 reads that alligns to tdTomato. The cell IS expected to emit fluorescently. The reason why modifying a genome to include a fluorophore is for better live cell imaging under a microscope, probably for counting number of cells or traceing cells.
 
 # Q5. Investigating the Variants
 
@@ -245,7 +237,7 @@ ref_1 = variants$REF[1]
 alt_1 = variants$ALT[1]
 
 cat("Reference allele base of the first variant: ", ref_1,"\n")
-cat("Alternative allele base of the first variant calledby STrelka: ", alt_1)
+cat("Alternative allele base of the first variant called by STrelka: ", alt_1)
 
 ```
 ## Q5.2
@@ -262,11 +254,8 @@ cat("The ANN info is:", ANN_1)
 ```{r}
 detailANN_1 = strsplit(ANN_1,',')
 detailANN_1
-
 ```
-We know that the variant is most likely a modifier variant, located on the Sulf1 
-gene, transcripted, and within the protein coding region. The annotation also 
-has other information about the position on the cDNA, feature ID, and more.
+By looking at the first annotation entry, We know that the intron_variant is most likely a modifier variant, located on the Sulf1 gene, transcripted, and within the protein coding region. The annotation also has other information about the position on the cDNA, feature ID, and more.
 
 ## Q5.4
 
@@ -286,14 +275,12 @@ cat("The ANN info is:", ANN_683)
 
 detailANN_683 = strsplit(ANN_683,',')
 detailANN_683
-
 ```
-The variant would be affecting the Sulf1 gene
+The intron_variant would be affecting the Sulf1 gene.
 
 ## Q5.5
 
 ```{r}
-
 for (index in 1:nrow(variants)){
   variants$HIGH[index] = grepl("HIGH",strsplit((variants$INFO[index]),";"))
   variants$MODERATE[index] = grepl("MODERATE",strsplit(as.character(variants$INFO[index]),";"))
@@ -334,7 +321,10 @@ cat("Intronic/intergeneic variants make up", (sum(variants$intronic) + sum(varia
 ```{r}
 variants[variants$HIGH == TRUE,]$INFO
 ```
-All of them has the potential to affect the final transcripted protein
+All of them have the potential to affect the final transcripted protein
+
+## Q5.9
+If the insertion is longer than the read length, the read might might not span the entire length of the insertion, leading to challenges in accurately aligning and identifying the presence of the entire inserted sequence. 
 
 ## Q5.10
 
@@ -348,7 +338,6 @@ for (index in 1:nrow(variants)){
   alt_count_index = as.integer(variants$alt_count[index][[1]][1])
   ref_count_index =  as.integer(variants$ref_count[index][[1]][1])
   variants$VAF[index] = alt_count_index / (alt_count_index + ref_count_index)
-  
 }
 
 ggplot(data = variants) + 
@@ -364,6 +353,6 @@ for (index in 1:nrow(variants)){
 
 cat("Number of variants with VAF > 5% and in protein coding region:", 
     sum(variants$VAFgreat_codingregion, na.rm = TRUE))
-
 ```
+
 
