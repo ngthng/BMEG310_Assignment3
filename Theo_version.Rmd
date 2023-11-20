@@ -2,7 +2,9 @@
 title: "Theo's version"
 author: "Theo-60985751, Hannah- , Jingxuan-"
 date: "2023-11-18"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
